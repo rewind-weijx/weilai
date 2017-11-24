@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Maps;
 import com.jeeplus.common.config.Global;
 import com.jeeplus.common.utils.StringUtils;
@@ -69,7 +68,6 @@ public abstract class BaseEntity<T> implements Serializable {
 		this.id = id;
 	}
 	
-	@JsonIgnore
 	@XmlTransient
 	public User getCurrentUser() {
 		if(currentUser == null){
@@ -82,7 +80,6 @@ public abstract class BaseEntity<T> implements Serializable {
 		this.currentUser = currentUser;
 	}
 
-	@JsonIgnore
 	@XmlTransient
 	public Page<T> getPage() {
 		if (page == null){
@@ -96,7 +93,6 @@ public abstract class BaseEntity<T> implements Serializable {
 		return page;
 	}
 
-	@JsonIgnore
 	@XmlTransient
 	public Map<String, String> getSqlMap() {
 		if (sqlMap == null){
@@ -139,7 +135,6 @@ public abstract class BaseEntity<T> implements Serializable {
 	/**
 	 * 全局变量对象
 	 */
-	@JsonIgnore
 	public Global getGlobal() {
 		return Global.getInstance();
 	}
@@ -147,7 +142,6 @@ public abstract class BaseEntity<T> implements Serializable {
 	/**
 	 * 获取数据库名称
 	 */
-	@JsonIgnore
 	public String getDbName(){
 		return Global.getConfig("jdbc.type");
 	}

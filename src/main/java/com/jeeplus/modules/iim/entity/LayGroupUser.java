@@ -3,11 +3,10 @@
  */
 package com.jeeplus.modules.iim.entity;
 
-import com.jeeplus.modules.sys.entity.User;
 import org.hibernate.validator.constraints.Length;
 
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
+import com.jeeplus.modules.sys.entity.User;
 
 /**
  * 群组Entity
@@ -32,7 +31,6 @@ public class LayGroupUser extends DataEntity<LayGroupUser> {
 		this.group = group;
 	}
 
-	@ExcelField(title="用户", fieldType=User.class, value="user.name", align=2, sort=7)
 	public User getUser() {
 		return user;
 	}

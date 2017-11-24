@@ -6,7 +6,6 @@ package com.jeeplus.modules.iim.entity;
 import org.hibernate.validator.constraints.Length;
 
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
 
 /**
  * 聊天记录Entity
@@ -31,7 +30,6 @@ public class ChatHistory extends DataEntity<ChatHistory> {
 	}
 
 	@Length(min=0, max=64, message="userid1长度必须介于 0 和 64 之间")
-	@ExcelField(title="userid1", align=2, sort=1)
 	public String getUserid1() {
 		return userid1;
 	}
@@ -41,7 +39,6 @@ public class ChatHistory extends DataEntity<ChatHistory> {
 	}
 	
 	@Length(min=0, max=64, message="userid2长度必须介于 0 和 64 之间")
-	@ExcelField(title="userid2", align=2, sort=2)
 	public String getUserid2() {
 		return userid2;
 	}
@@ -51,7 +48,6 @@ public class ChatHistory extends DataEntity<ChatHistory> {
 	}
 	
 	@Length(min=0, max=1024, message="msg长度必须介于 0 和 1024 之间")
-	@ExcelField(title="msg", align=2, sort=3)
 	public String getMsg() {
 		return msg;
 	}
@@ -61,7 +57,6 @@ public class ChatHistory extends DataEntity<ChatHistory> {
 	}
 	
 	@Length(min=0, max=45, message="status长度必须介于 0 和 45 之间")
-	@ExcelField(title="status", align=2, sort=4)
 	public String getStatus() {
 		return status;
 	}

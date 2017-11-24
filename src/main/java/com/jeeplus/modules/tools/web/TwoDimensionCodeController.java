@@ -18,7 +18,6 @@ import com.jeeplus.modules.sys.entity.User;
 import com.jeeplus.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.jeeplus.modules.sys.service.SystemService;
 import com.jeeplus.modules.sys.utils.UserUtils;
-import com.jeeplus.modules.tools.utils.TwoDimensionCode;
 
 /**
  * 二维码Controller
@@ -61,7 +60,7 @@ public class TwoDimensionCodeController extends BaseController {
 		String name="test.png"; //encoderImgId此处二维码的图片名
 			try {
 				String filePath = realPath + name;  //存放路径
-				TwoDimensionCode.encoderQRCode(encoderContent, filePath, "png");//执行生成二维码
+//				TwoDimensionCode.encoderQRCode(encoderContent, filePath, "png");//执行生成二维码
 				user.setQrCode(request.getContextPath()+Global.USERFILES_BASE_URL
 						+ principal + "/qrcode/"+name);
 				systemService.updateUserInfo(user);

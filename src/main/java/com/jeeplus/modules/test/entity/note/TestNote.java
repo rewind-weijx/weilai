@@ -5,7 +5,6 @@ package com.jeeplus.modules.test.entity.note;
 
 
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
 
 /**
  * 富文本测试Entity
@@ -26,7 +25,6 @@ public class TestNote extends DataEntity<TestNote> {
 		super(id);
 	}
 
-	@ExcelField(title="标题", align=2, sort=7)
 	public String getTitle() {
 		return title;
 	}
@@ -35,7 +33,6 @@ public class TestNote extends DataEntity<TestNote> {
 		this.title = title;
 	}
 	
-	@ExcelField(title="内容", align=2, sort=8)
 	public String getContents() {
 		return contents;
 	}

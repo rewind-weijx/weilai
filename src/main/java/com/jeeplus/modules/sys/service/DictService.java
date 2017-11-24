@@ -9,10 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jeeplus.common.service.CrudService;
-import com.jeeplus.common.utils.CacheUtils;
 import com.jeeplus.modules.sys.dao.DictDao;
 import com.jeeplus.modules.sys.entity.Dict;
-import com.jeeplus.modules.sys.utils.DictUtils;
 
 /**
  * 字典Service
@@ -34,13 +32,11 @@ public class DictService extends CrudService<DictDao, Dict> {
 	@Transactional(readOnly = false)
 	public void save(Dict dict) {
 		super.save(dict);
-		CacheUtils.remove(DictUtils.CACHE_DICT_MAP);
 	}
 
 	@Transactional(readOnly = false)
 	public void delete(Dict dict) {
 		super.delete(dict);
-		CacheUtils.remove(DictUtils.CACHE_DICT_MAP);
 	}
 
 }

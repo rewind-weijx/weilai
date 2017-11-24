@@ -10,7 +10,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
 
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -27,17 +26,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.jeeplus.common.beanvalidator.BeanValidators;
 import com.jeeplus.common.config.Global;
 import com.jeeplus.common.json.AjaxJson;
 import com.jeeplus.common.persistence.Page;
-import com.jeeplus.common.sms.SMSUtils;
 import com.jeeplus.common.utils.DateUtils;
 import com.jeeplus.common.utils.FileUtils;
-import com.jeeplus.common.utils.MyBeanUtils;
 import com.jeeplus.common.utils.StringUtils;
-import com.jeeplus.common.utils.excel.ExportExcel;
-import com.jeeplus.common.utils.excel.ImportExcel;
 import com.jeeplus.common.web.BaseController;
 import com.jeeplus.modules.sys.dao.UserDao;
 import com.jeeplus.modules.sys.entity.Office;
@@ -47,7 +41,6 @@ import com.jeeplus.modules.sys.entity.User;
 import com.jeeplus.modules.sys.service.SystemConfigService;
 import com.jeeplus.modules.sys.service.SystemService;
 import com.jeeplus.modules.sys.utils.UserUtils;
-import com.jeeplus.modules.tools.utils.TwoDimensionCode;
 
 /**
  * 用户Controller
@@ -140,7 +133,7 @@ public class UserController extends BaseController {
 		FileUtils.createDirectory(realPath);
 		String name= user.getId()+".png"; //encoderImgId此处二维码的图片名
 		String filePath = realPath + name;  //存放路径
-		TwoDimensionCode.encoderQRCode(user.getLoginName(), filePath, "png");//执行生成二维码
+//		TwoDimensionCode.encoderQRCode(user.getLoginName(), filePath, "png");//执行生成二维码
 		user.setQrCode(request.getContextPath()+Global.USERFILES_BASE_URL
 			+  user.getId()  + "/qrcode/"+name);
 		// 保存用户信息
@@ -211,7 +204,6 @@ public class UserController extends BaseController {
 		try {
             String fileName = "用户数据"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
             Page<User> page = systemService.findUser(new Page<User>(request, response, -1), user);
-    		new ExportExcel("用户数据", User.class).setDataList(page.getList()).write(response, fileName).dispose();
     		return null;
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导出用户失败！失败信息："+e.getMessage());
@@ -233,37 +225,6 @@ public class UserController extends BaseController {
 			return "redirect:" + adminPath + "/sys/user/list?repage";
 		}
 		try {
-			int successNum = 0;
-			int failureNum = 0;
-			StringBuilder failureMsg = new StringBuilder();
-			ImportExcel ei = new ImportExcel(file, 1, 0);
-			List<User> list = ei.getDataList(User.class);
-			for (User user : list){
-				try{
-					if ("true".equals(checkLoginName("", user.getLoginName()))){
-						user.setPassword(SystemService.entryptPassword("123456"));
-						BeanValidators.validateWithException(validator, user);
-						systemService.saveUser(user);
-						successNum++;
-					}else{
-						failureMsg.append("<br/>登录名 "+user.getLoginName()+" 已存在; ");
-						failureNum++;
-					}
-				}catch(ConstraintViolationException ex){
-					failureMsg.append("<br/>登录名 "+user.getLoginName()+" 导入失败：");
-					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
-					for (String message : messageList){
-						failureMsg.append(message+"; ");
-						failureNum++;
-					}
-				}catch (Exception ex) {
-					failureMsg.append("<br/>登录名 "+user.getLoginName()+" 导入失败："+ex.getMessage());
-				}
-			}
-			if (failureNum>0){
-				failureMsg.insert(0, "，失败 "+failureNum+" 条用户，导入信息如下：");
-			}
-			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条用户"+failureMsg);
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入用户失败！失败信息："+e.getMessage());
 		}
@@ -280,10 +241,6 @@ public class UserController extends BaseController {
     @RequestMapping(value = "import/template")
     public String importFileTemplate(HttpServletResponse response, RedirectAttributes redirectAttributes) {
 		try {
-            String fileName = "用户数据导入模板.xlsx";
-    		List<User> list = Lists.newArrayList(); list.add(UserUtils.getUser());
-    		new ExportExcel("用户数据", User.class, 2).setDataList(list).write(response, fileName).dispose();
-    		return null;
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入模板下载失败！失败信息："+e.getMessage());
 		}

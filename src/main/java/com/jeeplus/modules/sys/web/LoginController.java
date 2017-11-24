@@ -10,7 +10,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.web.util.SavedRequest;
@@ -25,11 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.google.common.collect.Maps;
 import com.jeeplus.common.config.Global;
 import com.jeeplus.common.json.AjaxJson;
-import com.jeeplus.common.mapper.JsonMapper;
 import com.jeeplus.common.persistence.Page;
 import com.jeeplus.common.security.shiro.session.SessionDAO;
 import com.jeeplus.common.servlet.ValidateCodeServlet;
-import com.jeeplus.common.utils.CacheUtils;
 import com.jeeplus.common.utils.CookieUtils;
 import com.jeeplus.common.utils.IdGen;
 import com.jeeplus.common.utils.StringUtils;
@@ -296,11 +293,7 @@ public class LoginController extends BaseController{
 	 */
 	@SuppressWarnings("unchecked")
 	public static boolean isValidateCodeLogin(String useruame, boolean isFail, boolean clean){
-		Map<String, Integer> loginFailMap = (Map<String, Integer>)CacheUtils.get("loginFailMap");
-		if (loginFailMap==null){
-			loginFailMap = Maps.newHashMap();
-			CacheUtils.put("loginFailMap", loginFailMap);
-		}
+		Map<String, Integer> loginFailMap =  Maps.newHashMap();
 		Integer loginFailNum = loginFailMap.get(useruame);
 		if (loginFailNum==null){
 			loginFailNum = 0;

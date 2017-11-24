@@ -6,7 +6,6 @@ package com.jeeplus.modules.tools.entity;
 import org.hibernate.validator.constraints.Length;
 
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
 
 /**
  * 接口Entity
@@ -33,7 +32,6 @@ public class TestInterface extends DataEntity<TestInterface> {
 	}
 
 	@Length(min=0, max=1024, message="接口名称长度必须介于 0 和 1024 之间")
-	@ExcelField(title="接口名称", align=2, sort=1)
 	public String getName() {
 		return name;
 	}
@@ -43,7 +41,6 @@ public class TestInterface extends DataEntity<TestInterface> {
 	}
 	
 	@Length(min=0, max=16, message="接口类型长度必须介于 0 和 16 之间")
-	@ExcelField(title="接口类型", dictType="type", align=2, sort=2)
 	public String getType() {
 		return type;
 	}
@@ -53,7 +50,6 @@ public class TestInterface extends DataEntity<TestInterface> {
 	}
 	
 	@Length(min=0, max=256, message="请求URL长度必须介于 0 和 256 之间")
-	@ExcelField(title="请求URL", align=2, sort=3)
 	public String getUrl() {
 		return url;
 	}
@@ -63,7 +59,6 @@ public class TestInterface extends DataEntity<TestInterface> {
 	}
 	
 	@Length(min=0, max=2048, message="请求body长度必须介于 0 和 2048 之间")
-	@ExcelField(title="请求body", align=2, sort=4)
 	public String getBody() {
 		return body;
 	}
@@ -73,7 +68,6 @@ public class TestInterface extends DataEntity<TestInterface> {
 	}
 	
 	@Length(min=0, max=512, message="成功时返回消息长度必须介于 0 和 512 之间")
-	@ExcelField(title="成功时返回消息", align=2, sort=5)
 	public String getSuccessmsg() {
 		return successmsg;
 	}
@@ -83,7 +77,6 @@ public class TestInterface extends DataEntity<TestInterface> {
 	}
 	
 	@Length(min=0, max=512, message="失败时返回消息长度必须介于 0 和 512 之间")
-	@ExcelField(title="失败时返回消息", align=2, sort=6)
 	public String getErrormsg() {
 		return errormsg;
 	}
@@ -93,7 +86,6 @@ public class TestInterface extends DataEntity<TestInterface> {
 	}
 	
 	@Length(min=0, max=512, message="备注长度必须介于 0 和 512 之间")
-	@ExcelField(title="备注", align=2, sort=7)
 	public String getRemarks() {
 		return remarks;
 	}

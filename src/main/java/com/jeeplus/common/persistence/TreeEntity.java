@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.jeeplus.common.utils.Reflections;
 import com.jeeplus.common.utils.StringUtils;
 
@@ -38,7 +37,7 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 	 * 父对象，只能通过子类实现，父类实现mybatis无法读取
 	 * @return
 	 */
-	@JsonBackReference
+	
 	@NotNull
 	public abstract T getParent();
 

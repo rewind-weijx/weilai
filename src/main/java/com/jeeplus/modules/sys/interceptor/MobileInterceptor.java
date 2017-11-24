@@ -10,8 +10,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jeeplus.common.service.BaseService;
-import com.jeeplus.common.utils.StringUtils;
-import com.jeeplus.common.utils.UserAgentUtils;
 
 /**
  * 手机端视图拦截器

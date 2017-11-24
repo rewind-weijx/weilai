@@ -19,7 +19,6 @@ import com.jeeplus.common.security.Digests;
 import com.jeeplus.common.security.shiro.session.SessionDAO;
 import com.jeeplus.common.service.BaseService;
 import com.jeeplus.common.service.ServiceException;
-import com.jeeplus.common.utils.CacheUtils;
 import com.jeeplus.common.utils.Encodes;
 import com.jeeplus.common.utils.StringUtils;
 import com.jeeplus.modules.sys.dao.MenuDao;
@@ -30,7 +29,6 @@ import com.jeeplus.modules.sys.entity.Office;
 import com.jeeplus.modules.sys.entity.Role;
 import com.jeeplus.modules.sys.entity.User;
 import com.jeeplus.modules.sys.security.SystemAuthorizingRealm;
-import com.jeeplus.modules.sys.utils.LogUtils;
 import com.jeeplus.modules.sys.utils.UserUtils;
 
 /**
@@ -111,13 +109,10 @@ public class SystemService extends BaseService implements InitializingBean {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<User> findUserByOfficeId(String officeId) {
-		List<User> list = (List<User>)CacheUtils.get(UserUtils.USER_CACHE, UserUtils.USER_CACHE_LIST_BY_OFFICE_ID_ + officeId);
-		if (list == null){
-			User user = new User();
-			user.setOffice(new Office(officeId));
-			list = userDao.findUserByOfficeId(user);
-			CacheUtils.put(UserUtils.USER_CACHE, UserUtils.USER_CACHE_LIST_BY_OFFICE_ID_ + officeId, list);
-		}
+		List<User> list = null;
+		User user = new User();
+		user.setOffice(new Office(officeId));
+		list = userDao.findUserByOfficeId(user);
 		return list;
 	}
 	
@@ -129,9 +124,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		}else{
 			// 清除原用户机构用户缓存
 			User oldUser = userDao.get(user.getId());
-			if (oldUser.getOffice() != null && oldUser.getOffice().getId() != null){
-				CacheUtils.remove(UserUtils.USER_CACHE, UserUtils.USER_CACHE_LIST_BY_OFFICE_ID_ + oldUser.getOffice().getId());
-			}
 			// 更新用户数据
 			user.preUpdate();
 			userDao.update(user);
@@ -352,8 +344,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
 //		// 清除权限缓存
 //		systemRealm.clearAllCachedAuthorizationInfo();
-		// 清除日志相关缓存
-		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
 	}
 
 	@Transactional(readOnly = false)
@@ -363,8 +353,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
 //		// 清除权限缓存
 //		systemRealm.clearAllCachedAuthorizationInfo();
-		// 清除日志相关缓存
-		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
 	}
 
 	@Transactional(readOnly = false)
@@ -374,8 +362,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
 //		// 清除权限缓存
 //		systemRealm.clearAllCachedAuthorizationInfo();
-		// 清除日志相关缓存
-		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
 	}
 	
 	/**
@@ -393,7 +379,6 @@ public class SystemService extends BaseService implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 	

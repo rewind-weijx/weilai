@@ -9,8 +9,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jeeplus.common.persistence.DataEntity;
 import com.jeeplus.modules.sys.utils.UserUtils;
 
@@ -45,7 +43,6 @@ public class Menu extends DataEntity<Menu> {
 		super(id);
 	}
 	
-	@JsonBackReference
 	@NotNull
 	public Menu getParent() {
 		return parent;
@@ -131,7 +128,7 @@ public class Menu extends DataEntity<Menu> {
 		return parent != null && parent.getId() != null ? parent.getId() : "0";
 	}
 
-	@JsonIgnore
+	
 	public boolean hasPermisson(){
 		List<Menu> menuList = UserUtils.getMenuList();
 		for(Menu menu:menuList){
@@ -141,7 +138,7 @@ public class Menu extends DataEntity<Menu> {
 		return false;
 	}
 	
-	@JsonIgnore
+	
 	public static void sortList(List<Menu> list, List<Menu> sourcelist, String parentId, boolean cascade){
 		for (int i=0; i<sourcelist.size(); i++){
 			Menu e = sourcelist.get(i);
@@ -163,7 +160,7 @@ public class Menu extends DataEntity<Menu> {
 		}
 	}
 
-	@JsonIgnore
+	
 	public static String getRootId(){
 		return "1";
 	}

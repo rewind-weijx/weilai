@@ -3,15 +3,14 @@
  */
 package com.jeeplus.modules.test.entity.one;
 
-import com.jeeplus.modules.sys.entity.User;
-import javax.validation.constraints.NotNull;
-import com.jeeplus.modules.sys.entity.Office;
-import com.jeeplus.modules.sys.entity.Area;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.validation.constraints.NotNull;
 
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
+import com.jeeplus.modules.sys.entity.Area;
+import com.jeeplus.modules.sys.entity.Office;
+import com.jeeplus.modules.sys.entity.User;
 
 /**
  * 请假表单Entity
@@ -36,7 +35,6 @@ public class FormLeave extends DataEntity<FormLeave> {
 	}
 
 	@NotNull(message="员工不能为空")
-	@ExcelField(title="员工", fieldType=User.class, value="tuser.name", align=2, sort=1)
 	public User getTuser() {
 		return tuser;
 	}
@@ -46,7 +44,6 @@ public class FormLeave extends DataEntity<FormLeave> {
 	}
 	
 	@NotNull(message="归属部门不能为空")
-	@ExcelField(title="归属部门", fieldType=Office.class, value="office.name", align=2, sort=2)
 	public Office getOffice() {
 		return office;
 	}
@@ -55,7 +52,6 @@ public class FormLeave extends DataEntity<FormLeave> {
 		this.office = office;
 	}
 	
-	@ExcelField(title="归属区域", fieldType=Area.class, value="area.name", align=2, sort=3)
 	public Area getArea() {
 		return area;
 	}
@@ -64,8 +60,6 @@ public class FormLeave extends DataEntity<FormLeave> {
 		this.area = area;
 	}
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@ExcelField(title="请假开始日期", align=2, sort=4)
 	public Date getBeginDate() {
 		return beginDate;
 	}
@@ -74,8 +68,6 @@ public class FormLeave extends DataEntity<FormLeave> {
 		this.beginDate = beginDate;
 	}
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@ExcelField(title="请假结束日期", align=2, sort=5)
 	public Date getEndDate() {
 		return endDate;
 	}

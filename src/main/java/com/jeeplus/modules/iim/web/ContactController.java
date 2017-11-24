@@ -3,30 +3,24 @@
  */
 package com.jeeplus.modules.iim.web;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.jeeplus.common.config.Global;
-import com.jeeplus.common.utils.FileUtils;
 import com.jeeplus.common.utils.IdGen;
 import com.jeeplus.common.web.BaseController;
 import com.jeeplus.modules.iim.entity.Friend;
 import com.jeeplus.modules.iim.entity.FriendGroup;
-import com.jeeplus.modules.iim.entity.LayFileJsonData;
 import com.jeeplus.modules.iim.entity.LayGroup;
 import com.jeeplus.modules.iim.entity.LayGroupJsonData;
 import com.jeeplus.modules.iim.entity.LayGroupUser;
@@ -304,29 +298,29 @@ public class ContactController extends BaseController {
 		return j;
 	}
 
-	@ResponseBody
-	@RequestMapping(value = { "uploadImage", "uploadFile" })
-	public String uploadImage(HttpServletRequest request, HttpServletResponse response, MultipartFile file)
-			throws IllegalStateException, IOException {
-		String filepath = "";
-		String content = null;
-		LayFileJsonData data = new LayFileJsonData();
-		// 判断文件是否为空
-		if (!file.isEmpty()) {
-			// 文件保存路径
-			String realPath = Global.USERFILES_BASE_URL + UserUtils.getPrincipal() + "/images/";
-			// 转存文件
-			FileUtils.createDirectory(Global.getUserfilesBaseDir() + realPath);
-			file.transferTo(new File(Global.getUserfilesBaseDir() + realPath + file.getOriginalFilename()));
-			filepath = request.getContextPath() + realPath + file.getOriginalFilename();
-			data.setName(file.getName());
-			data.setSrc(filepath);
-		}
-		ObjectMapper mapper = new ObjectMapper();
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("code", "0");
-		map.put("data", data);
-		content = mapper.writeValueAsString(map);
- 		return content;
-	}
+//	@ResponseBody
+//	@RequestMapping(value = { "uploadImage", "uploadFile" })
+//	public String uploadImage(HttpServletRequest request, HttpServletResponse response, MultipartFile file)
+//			throws IllegalStateException, IOException {
+//		String filepath = "";
+//		String content = null;
+//		LayFileJsonData data = new LayFileJsonData();
+//		// 判断文件是否为空
+//		if (!file.isEmpty()) {
+//			// 文件保存路径
+//			String realPath = Global.USERFILES_BASE_URL + UserUtils.getPrincipal() + "/images/";
+//			// 转存文件
+//			FileUtils.createDirectory(Global.getUserfilesBaseDir() + realPath);
+//			file.transferTo(new File(Global.getUserfilesBaseDir() + realPath + file.getOriginalFilename()));
+//			filepath = request.getContextPath() + realPath + file.getOriginalFilename();
+//			data.setName(file.getName());
+//			data.setSrc(filepath);
+//		}
+//		ObjectMapper mapper = new ObjectMapper();
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("code", "0");
+//		map.put("data", data);
+//		content = mapper.writeValueAsString(map);
+// 		return content;
+//	}
 }

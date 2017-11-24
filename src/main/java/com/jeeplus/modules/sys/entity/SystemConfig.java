@@ -6,7 +6,6 @@ package com.jeeplus.modules.sys.entity;
 import org.hibernate.validator.constraints.Length;
 
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
 
 /**
  * 系统配置Entity
@@ -32,7 +31,6 @@ public class SystemConfig extends DataEntity<SystemConfig> {
 	}
 
 	@Length(min=0, max=64, message="邮箱服务器地址长度必须介于 0 和 64 之间")
-	@ExcelField(title="邮箱服务器地址", align=2, sort=1)
 	public String getSmtp() {
 		return smtp;
 	}
@@ -42,7 +40,6 @@ public class SystemConfig extends DataEntity<SystemConfig> {
 	}
 	
 	@Length(min=0, max=64, message="邮箱服务器端口长度必须介于 0 和 64 之间")
-	@ExcelField(title="邮箱服务器端口", align=2, sort=2)
 	public String getPort() {
 		return port;
 	}
@@ -52,7 +49,6 @@ public class SystemConfig extends DataEntity<SystemConfig> {
 	}
 	
 	@Length(min=0, max=64, message="系统邮箱地址长度必须介于 0 和 64 之间")
-	@ExcelField(title="系统邮箱地址", align=2, sort=3)
 	public String getMailName() {
 		return mailName;
 	}
@@ -62,7 +58,6 @@ public class SystemConfig extends DataEntity<SystemConfig> {
 	}
 	
 	@Length(min=0, max=64, message="系统邮箱密码长度必须介于 0 和 64 之间")
-	@ExcelField(title="系统邮箱密码", align=2, sort=4)
 	public String getMailPassword() {
 		return mailPassword;
 	}
@@ -72,7 +67,6 @@ public class SystemConfig extends DataEntity<SystemConfig> {
 	}
 	
 	@Length(min=0, max=64, message="短信用户名长度必须介于 0 和 64 之间")
-	@ExcelField(title="短信用户名", align=2, sort=5)
 	public String getSmsName() {
 		return smsName;
 	}
@@ -82,7 +76,6 @@ public class SystemConfig extends DataEntity<SystemConfig> {
 	}
 	
 	@Length(min=0, max=64, message="短信密码长度必须介于 0 和 64 之间")
-	@ExcelField(title="短信密码", align=2, sort=6)
 	public String getSmsPassword() {
 		return smsPassword;
 	}

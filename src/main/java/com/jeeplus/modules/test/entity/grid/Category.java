@@ -5,7 +5,6 @@ package com.jeeplus.modules.test.entity.grid;
 
 
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
 
 /**
  * 商品分类Entity
@@ -25,7 +24,6 @@ public class Category extends DataEntity<Category> {
 		super(id);
 	}
 
-	@ExcelField(title="类型名", align=2, sort=1)
 	public String getName() {
 		return name;
 	}

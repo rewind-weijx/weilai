@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
-import org.apache.tools.zip.ZipEntry;
-import org.apache.tools.zip.ZipFile;
-import org.apache.tools.zip.ZipOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -471,7 +471,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 			int readByte = 0;
 			// 获取ZIP文件里所有的entry
 			@SuppressWarnings("rawtypes")
-			Enumeration enums = zipFile.getEntries();
+			Enumeration enums = zipFile.entries();
 			// 遍历所有entry
 			while (enums.hasMoreElements()) {
 				entry = (ZipEntry) enums.nextElement();

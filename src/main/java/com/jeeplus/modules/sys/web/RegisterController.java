@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.common.collect.Lists;
 import com.jeeplus.common.config.Global;
 import com.jeeplus.common.json.AjaxJson;
-import com.jeeplus.common.sms.SMSUtils;
 import com.jeeplus.common.utils.FileUtils;
 import com.jeeplus.common.utils.StringUtils;
 import com.jeeplus.common.web.BaseController;
@@ -32,7 +31,6 @@ import com.jeeplus.modules.sys.service.OfficeService;
 import com.jeeplus.modules.sys.service.SystemConfigService;
 import com.jeeplus.modules.sys.service.SystemService;
 import com.jeeplus.modules.sys.utils.UserUtils;
-import com.jeeplus.modules.tools.utils.TwoDimensionCode;
 
 /**
  * 用户Controller
@@ -151,7 +149,7 @@ public class RegisterController extends BaseController {
 		FileUtils.createDirectory(realPath);
 		String name= user.getId()+".png"; //encoderImgId此处二维码的图片名
 		String filePath = realPath + name;  //存放路径
-		TwoDimensionCode.encoderQRCode(user.getLoginName(), filePath, "png");//执行生成二维码
+//		TwoDimensionCode.encoderQRCode(user.getLoginName(), filePath, "png");//执行生成二维码
 		user.setQrCode(request.getContextPath()+Global.USERFILES_BASE_URL
 			+  user.getId()  + "/qrcode/"+name);
 		// 保存用户信息

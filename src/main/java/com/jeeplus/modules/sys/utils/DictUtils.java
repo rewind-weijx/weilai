@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.jeeplus.common.utils.CacheUtils;
 import com.jeeplus.common.utils.SpringContextHolder;
 import com.jeeplus.modules.sys.dao.DictDao;
 import com.jeeplus.modules.sys.entity.Dict;
@@ -65,9 +64,7 @@ public class DictUtils {
 	
 	public static List<Dict> getDictList(String type){
 		@SuppressWarnings("unchecked")
-		Map<String, List<Dict>> dictMap = (Map<String, List<Dict>>)CacheUtils.get(CACHE_DICT_MAP);
-		if (dictMap==null){
-			dictMap = Maps.newHashMap();
+		Map<String, List<Dict>> dictMap = Maps.newHashMap();
 			for (Dict dict : dictDao.findAllList(new Dict())){
 				List<Dict> dictList = dictMap.get(dict.getType());
 				if (dictList != null){
@@ -76,8 +73,6 @@ public class DictUtils {
 					dictMap.put(dict.getType(), Lists.newArrayList(dict));
 				}
 			}
-			CacheUtils.put(CACHE_DICT_MAP, dictMap);
-		}
 		List<Dict> dictList = dictMap.get(type);
 		if (dictList == null){
 			dictList = Lists.newArrayList();

@@ -4,7 +4,6 @@
 package com.jeeplus.modules.test.entity.tree;
 
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import com.jeeplus.common.persistence.TreeEntity;
 
@@ -46,7 +45,6 @@ public class TestTree extends TreeEntity<TestTree> {
 		this.sort = sort;
 	}
 	
-	@JsonBackReference
 	@NotNull(message="父级编号不能为空")
 	public TestTree getParent() {
 		return parent;

@@ -13,7 +13,6 @@ import java.util.Properties;
 import org.apache.ibatis.io.Resources;
 import org.springframework.core.io.DefaultResourceLoader;
 
-import com.ckfinder.connector.ServletContextFactory;
 import com.google.common.collect.Maps;
 import com.jeeplus.common.utils.PropertiesLoader;
 import com.jeeplus.common.utils.StringUtils;
@@ -141,7 +140,7 @@ public class Global {
 		String dir = getConfig("userfiles.basedir");
 		if (StringUtils.isBlank(dir)){
 			try {
-				dir = ServletContextFactory.getServletContext().getRealPath("/");
+//				dir = ServletContextFactory.getServletContext().getRealPath("/");
 			} catch (Exception e) {
 				return "";
 			}

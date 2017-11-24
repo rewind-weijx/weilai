@@ -5,8 +5,7 @@ package com.jeeplus.common.json;
 
 import java.util.LinkedHashMap;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jeeplus.common.mapper.JsonMapper;
+import com.alibaba.fastjson.JSON;
 
 
 /**
@@ -56,10 +55,9 @@ public class AjaxJson {
 		this.success = success;
 	}
 	
-	@JsonIgnore//返回对象时忽略此属性
 	public String getJsonStr() {//返回json字符串数组，将访问msg和key的方式统一化，都使用data.key的方式直接访问。
 
-		String json = JsonMapper.getInstance().toJson(this);
+		String json = JSON.toJSONString(this);
 		return json;
 	}
 

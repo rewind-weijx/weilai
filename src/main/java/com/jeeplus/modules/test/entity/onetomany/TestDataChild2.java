@@ -3,11 +3,10 @@
  */
 package com.jeeplus.modules.test.entity.onetomany;
 
-import com.jeeplus.modules.sys.entity.Area;
 import javax.validation.constraints.NotNull;
 
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
+import com.jeeplus.modules.sys.entity.Area;
 
 /**
  * 票务代理Entity
@@ -35,7 +34,6 @@ public class TestDataChild2 extends DataEntity<TestDataChild2> {
 	}
 
 	@NotNull(message="出发地不能为空")
-	@ExcelField(title="出发地", fieldType=Area.class, value="startArea.name", align=2, sort=1)
 	public Area getStartArea() {
 		return startArea;
 	}
@@ -45,7 +43,6 @@ public class TestDataChild2 extends DataEntity<TestDataChild2> {
 	}
 	
 	@NotNull(message="目的地不能为空")
-	@ExcelField(title="目的地", fieldType=Area.class, value="endArea.name", align=2, sort=2)
 	public Area getEndArea() {
 		return endArea;
 	}
@@ -54,7 +51,6 @@ public class TestDataChild2 extends DataEntity<TestDataChild2> {
 		this.endArea = endArea;
 	}
 	
-	@ExcelField(title="代理价格", align=2, sort=3)
 	public Double getPrice() {
 		return price;
 	}

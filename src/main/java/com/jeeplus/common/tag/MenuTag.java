@@ -8,7 +8,6 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jeeplus.common.config.Global;
 import com.jeeplus.common.utils.SpringContextHolder;
 import com.jeeplus.modules.sys.entity.Menu;

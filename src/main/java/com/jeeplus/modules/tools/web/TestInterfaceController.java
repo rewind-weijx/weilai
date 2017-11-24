@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,19 +22,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.common.collect.Lists;
 import com.jeeplus.common.config.Global;
 import com.jeeplus.common.persistence.Page;
-import com.jeeplus.common.utils.DateUtils;
 import com.jeeplus.common.utils.StringUtils;
-import com.jeeplus.common.utils.excel.ExportExcel;
-import com.jeeplus.common.utils.excel.ImportExcel;
 import com.jeeplus.common.web.BaseController;
 import com.jeeplus.modules.tools.entity.TestInterface;
 import com.jeeplus.modules.tools.service.TestInterfaceService;
@@ -124,61 +117,6 @@ public class TestInterfaceController extends BaseController {
 		addMessage(redirectAttributes, "删除接口成功");
 		return "redirect:"+Global.getAdminPath()+"/tools/testInterface/?repage";
 	}
-	
-	/**
-	 * 导出excel文件
-	 */
-	@RequiresPermissions("tools:testInterface:export")
-    @RequestMapping(value = "export", method=RequestMethod.POST)
-    public String exportFile(TestInterface testInterface, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
-		try {
-            String fileName = "接口"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
-            Page<TestInterface> page = testInterfaceService.findPage(new Page<TestInterface>(request, response, -1), testInterface);
-    		new ExportExcel("接口", TestInterface.class).setDataList(page.getList()).write(response, fileName).dispose();
-    		return null;
-		} catch (Exception e) {
-			addMessage(redirectAttributes, "导出接口记录失败！失败信息："+e.getMessage());
-		}
-		return "redirect:"+Global.getAdminPath()+"/tools/testInterface/?repage";
-    }
-
-	/**
-	 * 导入Excel数据
-
-	 */
-	@RequiresPermissions("tools:testInterface:import")
-    @RequestMapping(value = "import", method=RequestMethod.POST)
-    public String importFile(MultipartFile file, RedirectAttributes redirectAttributes) {
-		try {
-			int successNum = 0;
-			ImportExcel ei = new ImportExcel(file, 1, 0);
-			List<TestInterface> list = ei.getDataList(TestInterface.class);
-			for (TestInterface testInterface : list){
-				testInterfaceService.save(testInterface);
-			}
-			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条接口记录");
-		} catch (Exception e) {
-			addMessage(redirectAttributes, "导入接口失败！失败信息："+e.getMessage());
-		}
-		return "redirect:"+Global.getAdminPath()+"/tools/testInterface/?repage";
-    }
-	
-	/**
-	 * 下载导入接口数据模板
-	 */
-	@RequiresPermissions("tools:testInterface:import")
-    @RequestMapping(value = "import/template")
-    public String importFileTemplate(HttpServletResponse response, RedirectAttributes redirectAttributes) {
-		try {
-            String fileName = "接口数据导入模板.xlsx";
-    		List<TestInterface> list = Lists.newArrayList(); 
-    		new ExportExcel("接口数据", TestInterface.class, 1).setDataList(list).write(response, fileName).dispose();
-    		return null;
-		} catch (Exception e) {
-			addMessage(redirectAttributes, "导入模板下载失败！失败信息："+e.getMessage());
-		}
-		return "redirect:"+Global.getAdminPath()+"/tools/testInterface/?repage";
-    }
 	
 
 	@RequiresPermissions("tools:testInterface:test")

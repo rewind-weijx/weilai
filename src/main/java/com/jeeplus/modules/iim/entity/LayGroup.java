@@ -3,12 +3,12 @@
  */
 package com.jeeplus.modules.iim.entity;
 
-import org.hibernate.validator.constraints.Length;
 import java.util.List;
-import com.google.common.collect.Lists;
 
+import org.hibernate.validator.constraints.Length;
+
+import com.google.common.collect.Lists;
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
 
 /**
  * 群组Entity
@@ -31,7 +31,6 @@ public class LayGroup extends DataEntity<LayGroup> {
 	}
 
 	@Length(min=0, max=64, message="群组名长度必须介于 0 和 64 之间")
-	@ExcelField(title="群组名", align=2, sort=1)
 	public String getGroupname() {
 		return groupname;
 	}
@@ -41,7 +40,6 @@ public class LayGroup extends DataEntity<LayGroup> {
 	}
 	
 	@Length(min=0, max=256, message="群头像长度必须介于 0 和 256 之间")
-	@ExcelField(title="群头像", align=2, sort=2)
 	public String getAvatar() {
 		return avatar;
 	}

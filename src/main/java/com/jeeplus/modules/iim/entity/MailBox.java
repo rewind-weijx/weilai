@@ -3,9 +3,10 @@
  */
 package com.jeeplus.modules.iim.entity;
 
-import org.hibernate.validator.constraints.Length;
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.jeeplus.common.persistence.DataEntity;
 import com.jeeplus.modules.sys.entity.User;
 
@@ -61,7 +62,6 @@ public class MailBox extends DataEntity<MailBox> {
 		this.receiver = receiver;
 	}
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getSendtime() {
 		return sendtime;
 	}

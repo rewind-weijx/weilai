@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.alibaba.fastjson.JSON;
 import com.jeeplus.common.beanvalidator.BeanValidators;
-import com.jeeplus.common.mapper.JsonMapper;
 import com.jeeplus.common.utils.DateUtils;
 
 /**
@@ -143,7 +143,7 @@ public abstract class BaseController {
 	 * @return
 	 */
 	protected String renderString(HttpServletResponse response, Object object) {
-		return renderString(response, JsonMapper.toJsonString(object));
+		return renderString(response, JSON.toJSONString(object));
 	}
 	
 	/**

@@ -15,7 +15,6 @@ import org.apache.shiro.subject.Subject;
 
 import com.jeeplus.common.service.BaseService;
 import com.jeeplus.common.sms.SMSUtils;
-import com.jeeplus.common.utils.CacheUtils;
 import com.jeeplus.common.utils.SpringContextHolder;
 import com.jeeplus.modules.sys.dao.AreaDao;
 import com.jeeplus.modules.sys.dao.MenuDao;
@@ -59,16 +58,11 @@ public class UserUtils {
 	 * @return 取不到返回null
 	 */
 	public static User get(String id){
-		User user = (User)CacheUtils.get(USER_CACHE, USER_CACHE_ID_ + id);
-		if (user ==  null){
-			user = userDao.get(id);
+		User user =  userDao.get(id);
 			if (user == null){
 				return null;
 			}
 			user.setRoleList(roleDao.findList(new Role(user)));
-			CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + user.getId(), user);
-			CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getLoginName(), user);
-		}
 		return user;
 	}
 	
@@ -78,16 +72,11 @@ public class UserUtils {
 	 * @return 取不到返回null
 	 */
 	public static User getByLoginName(String loginName){
-		User user = (User)CacheUtils.get(USER_CACHE, USER_CACHE_LOGIN_NAME_ + loginName);
-		if (user == null){
-			user = userDao.getByLoginName(new User(null, loginName));
+		User user = userDao.getByLoginName(new User(null, loginName));
 			if (user == null){
 				return null;
 			}
 			user.setRoleList(roleDao.findList(new Role(user)));
-			CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + user.getId(), user);
-			CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getLoginName(), user);
-		}
 		return user;
 	}
 	
@@ -108,12 +97,7 @@ public class UserUtils {
 	 * @param user
 	 */
 	public static void clearCache(User user){
-		CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + user.getId());
-		CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getLoginName());
-		CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOldLoginName());
-		if (user.getOffice() != null && user.getOffice().getId() != null){
-			CacheUtils.remove(USER_CACHE, USER_CACHE_LIST_BY_OFFICE_ID_ + user.getOffice().getId());
-		}
+		System.out.println("======================方法为空======================");
 	}
 	
 	/**

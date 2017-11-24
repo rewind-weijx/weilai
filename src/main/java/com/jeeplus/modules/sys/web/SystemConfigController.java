@@ -3,8 +3,6 @@
  */
 package com.jeeplus.modules.sys.web;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,15 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.common.collect.Lists;
 import com.jeeplus.common.config.Global;
 import com.jeeplus.common.json.AjaxJson;
-import com.jeeplus.common.persistence.Page;
-import com.jeeplus.common.utils.DateUtils;
 import com.jeeplus.common.utils.MyBeanUtils;
 import com.jeeplus.common.utils.StringUtils;
-import com.jeeplus.common.utils.excel.ExportExcel;
-import com.jeeplus.common.utils.excel.ImportExcel;
 import com.jeeplus.common.web.BaseController;
 import com.jeeplus.modules.sys.entity.SystemConfig;
 import com.jeeplus.modules.sys.service.SystemConfigService;
@@ -123,9 +116,6 @@ public class SystemConfigController extends BaseController {
     @RequestMapping(value = "export", method=RequestMethod.POST)
     public String exportFile(SystemConfig systemConfig, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
 		try {
-            String fileName = "系统配置"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
-            Page<SystemConfig> page = systemConfigService.findPage(new Page<SystemConfig>(request, response, -1), systemConfig);
-    		new ExportExcel("系统配置", SystemConfig.class).setDataList(page.getList()).write(response, fileName).dispose();
     		return null;
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导出系统配置记录失败！失败信息："+e.getMessage());
@@ -142,11 +132,6 @@ public class SystemConfigController extends BaseController {
     public String importFile(MultipartFile file, RedirectAttributes redirectAttributes) {
 		try {
 			int successNum = 0;
-			ImportExcel ei = new ImportExcel(file, 1, 0);
-			List<SystemConfig> list = ei.getDataList(SystemConfig.class);
-			for (SystemConfig systemConfig : list){
-				systemConfigService.save(systemConfig);
-			}
 			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条系统配置记录");
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入系统配置失败！失败信息："+e.getMessage());
@@ -161,9 +146,6 @@ public class SystemConfigController extends BaseController {
     @RequestMapping(value = "import/template")
     public String importFileTemplate(HttpServletResponse response, RedirectAttributes redirectAttributes) {
 		try {
-            String fileName = "系统配置数据导入模板.xlsx";
-    		List<SystemConfig> list = Lists.newArrayList(); 
-    		new ExportExcel("系统配置数据", SystemConfig.class, 1).setDataList(list).write(response, fileName).dispose();
     		return null;
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入模板下载失败！失败信息："+e.getMessage());

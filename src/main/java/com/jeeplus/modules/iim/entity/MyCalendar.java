@@ -6,7 +6,6 @@ package com.jeeplus.modules.iim.entity;
 import org.hibernate.validator.constraints.Length;
 
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
 import com.jeeplus.modules.sys.entity.User;
 
 /**
@@ -33,7 +32,6 @@ public class MyCalendar extends DataEntity<MyCalendar> {
 	}
 
 	@Length(min=0, max=64, message="事件标题长度必须介于 0 和 64 之间")
-	@ExcelField(title="事件标题", align=2, sort=1)
 	public String getTitle() {
 		return title;
 	}
@@ -43,7 +41,6 @@ public class MyCalendar extends DataEntity<MyCalendar> {
 	}
 	
 	@Length(min=0, max=64, message="事件开始时间长度必须介于 0 和 64 之间")
-	@ExcelField(title="事件开始时间", align=2, sort=2)
 	public String getStart() {
 		return start;
 	}
@@ -53,7 +50,6 @@ public class MyCalendar extends DataEntity<MyCalendar> {
 	}
 	
 	@Length(min=0, max=64, message="事件结束时间长度必须介于 0 和 64 之间")
-	@ExcelField(title="事件结束时间", align=2, sort=3)
 	public String getEnd() {
 		return end;
 	}
@@ -63,7 +59,6 @@ public class MyCalendar extends DataEntity<MyCalendar> {
 	}
 	
 	@Length(min=0, max=64, message="是否为全天时间长度必须介于 0 和 64 之间")
-	@ExcelField(title="是否为全天时间", align=2, sort=4)
 	public String getAdllDay() {
 		return adllDay;
 	}
@@ -73,7 +68,6 @@ public class MyCalendar extends DataEntity<MyCalendar> {
 	}
 	
 	@Length(min=0, max=64, message="时间的背景色长度必须介于 0 和 64 之间")
-	@ExcelField(title="时间的背景色", align=2, sort=5)
 	public String getColor() {
 		return color;
 	}

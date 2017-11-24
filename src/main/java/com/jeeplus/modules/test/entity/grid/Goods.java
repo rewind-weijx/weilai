@@ -6,7 +6,6 @@ package com.jeeplus.modules.test.entity.grid;
 import com.jeeplus.modules.test.entity.grid.Category;
 
 import com.jeeplus.common.persistence.DataEntity;
-import com.jeeplus.common.utils.excel.annotation.ExcelField;
 
 /**
  * 商品Entity
@@ -28,7 +27,6 @@ public class Goods extends DataEntity<Goods> {
 		super(id);
 	}
 
-	@ExcelField(title="商品名称", align=2, sort=1)
 	public String getName() {
 		return name;
 	}
@@ -37,7 +35,6 @@ public class Goods extends DataEntity<Goods> {
 		this.name = name;
 	}
 	
-	@ExcelField(title="所属类型", align=2, sort=2)
 	public Category getCategory() {
 		return category;
 	}
@@ -46,7 +43,6 @@ public class Goods extends DataEntity<Goods> {
 		this.category = category;
 	}
 	
-	@ExcelField(title="价格", align=2, sort=3)
 	public String getPrice() {
 		return price;
 	}

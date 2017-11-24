@@ -8,8 +8,6 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jeeplus.common.utils.IdGen;
 import com.jeeplus.modules.sys.entity.User;
 import com.jeeplus.modules.sys.utils.UserUtils;
@@ -78,7 +76,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		this.remarks = remarks;
 	}
 	
-	@JsonIgnore
+	
 	public User getCreateBy() {
 		return createBy;
 	}
@@ -87,7 +85,6 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		this.createBy = createBy;
 	}
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -96,7 +93,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		this.createDate = createDate;
 	}
 
-	@JsonIgnore
+	
 	public User getUpdateBy() {
 		return updateBy;
 	}
@@ -105,7 +102,6 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		this.updateBy = updateBy;
 	}
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getUpdateDate() {
 		return updateDate;
 	}
@@ -114,7 +110,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		this.updateDate = updateDate;
 	}
 
-	@JsonIgnore
+	
 	@Length(min=1, max=1)
 	public String getDelFlag() {
 		return delFlag;

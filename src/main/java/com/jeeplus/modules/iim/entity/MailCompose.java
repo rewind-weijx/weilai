@@ -3,18 +3,15 @@
  */
 package com.jeeplus.modules.iim.entity;
 
-import org.hibernate.validator.constraints.Length;
-
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.Length;
+
 import com.google.common.collect.Lists;
 import com.jeeplus.common.persistence.DataEntity;
 import com.jeeplus.common.utils.Collections3;
-import com.jeeplus.common.utils.IdGen;
 import com.jeeplus.common.utils.StringUtils;
-import com.jeeplus.modules.oa.entity.OaNotifyRecord;
 import com.jeeplus.modules.sys.entity.User;
 
 
@@ -72,9 +69,6 @@ public class MailCompose extends DataEntity<MailCompose> {
 		this.sender = sender;
 	}
 	
-	
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getSendtime() {
 		return sendtime;
 	}
